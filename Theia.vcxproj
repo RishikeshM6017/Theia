@@ -46,7 +46,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Build\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)\Includes;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\Include;$(IncludePath)</IncludePath>
     <ExternalIncludePath>C:\SDKs\Vulkan\Include;C:\SDKs\GLFW\include;$(ExternalIncludePath)</ExternalIncludePath>
     <LibraryPath>C:\SDKs\Vulkan\Lib\;C:\SDKs\GLFW\lib-vc2022;$(LibraryPath)</LibraryPath>
     <SourcePath>$(SolutionDir)Source;$(SourcePath)</SourcePath>
@@ -54,7 +54,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Build\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)\Includes;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\Include;$(IncludePath)</IncludePath>
     <ExternalIncludePath>C:\SDKs\Vulkan\Include;C:\SDKs\GLFW\include;$(ExternalIncludePath)</ExternalIncludePath>
     <LibraryPath>C:\SDKs\Vulkan\Lib\;C:\SDKs\GLFW\lib-vc2022;$(LibraryPath)</LibraryPath>
     <SourcePath>$(SolutionDir)Source;$(SourcePath)</SourcePath>
@@ -67,6 +67,8 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>PCH.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -84,6 +86,8 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>PCH.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -95,6 +99,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\PCH.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">PCH.h</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">PCH.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="Source\Platform.cpp" />
+    <ClCompile Include="Source\Renderer.cpp" />
+    <ClCompile Include="Source\VkUtility.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\PCH.h" />
+    <ClInclude Include="Include\Platform.h" />
+    <ClInclude Include="Include\Renderer.h" />
+    <ClInclude Include="Include\VkUtility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
